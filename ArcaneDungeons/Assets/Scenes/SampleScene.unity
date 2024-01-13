@@ -245,9 +245,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b6d009a88039034383cb4e10f53adf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 1000
   agility: 1
   cridchange: 2
+  MaxStamina: 50
   damage:
     baseValue: 0
   mdamage:
@@ -257,10 +258,6 @@ MonoBehaviour:
   marmor:
     baseValue: 0
   intelligence:
-    baseValue: 0
-  critchance:
-    baseValue: 0
-  stamina:
     baseValue: 0
 --- !u!212 &891726778
 SpriteRenderer:

@@ -65,45 +65,59 @@ public int currentStamina { get; private set;}
        // Šance na crit 
 
         else {
-            if (currentStamina > 0) { 
+            if (currentStamina > 0){
+                int criddamage = UnityEngine.Random.Range(0, 16);
+                if (criddamage == cridchange)
+                {
+                    if (currentStamina >= 12)
+                    {
+                        int Changetomultiplie = UnityEngine.Random.Range(2, 5);
+                        damage = Changetomultiplie * damage;
+                        currentHealth -= damage;
+                        Debug.Log(transform.name + "udelil jsi crit" + damage + "damage.");
+
+                        currentStamina -= 12;
+                        Debug.Log(transform.name + "Zbyva ti jeste" + currentStamina + "Staminy");
 
 
+                    }
+                    else
+                    {
+                        Debug.Log(transform.name + "Nemáš dostatek staminy na provedení utoku " + currentStamina);
+                    }
+                }
+                else
+                {
+                    if (currentStamina >= 4)
+                    {
 
-         
-         int criddamage = UnityEngine.Random.Range(0, 16);
-            if (criddamage == cridchange) { 
-                if (currentStamina >= 12 ) { 
-                int Changetomultiplie = UnityEngine.Random.Range(2, 5); 
-                 damage = Changetomultiplie*damage;
-                 currentHealth -= damage;
-                 Debug.Log(transform.name + "udelil jsi crit" + damage + "damage.");
-                 
-                 currentStamina -= 12;
-            Debug.Log(transform.name + "Zbyva ti jeste" + currentStamina + "Staminy");
-              
-// stamina
-            }}else{     
-                  if (currentStamina >= 4 ) {
+                        currentStamina -= 4;
+                        Debug.Log(transform.name + "Zbyva ti jeste" + currentStamina + "Staminy");
+                        currentHealth -= damage;
+                        Debug.Log(transform.name + "Dostal" + damage + "damage.");
+                        Debug.Log(transform.name + "Zbyva ti jeste" + currentHealth + "zivotu");
+                    }
+                    else
+                    {
+                        Debug.Log(transform.name + "Nemáš dostatek staminy na provedení utoku " + currentStamina);
+                    }
 
-                  currentStamina -= 4;
-            Debug.Log(transform.name + "Zbyva ti jeste" + currentStamina + "Staminy");
-                currentHealth -= damage;
-            Debug.Log(transform.name + "Dostal" + damage + "damage.");
-            Debug.Log(transform.name + "Zbyva ti jeste" + currentHealth + "zivotu");}
-
-         }} Debug.Log(transform.name + "Nemáš dostatek staminy na provedení utoku " + currentStamina);
-
-
-
-
+                }
+            }
            
+
+
+
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
+
         }
 
 
 
-        if (currentHealth <= 0) {
-            Die();
-        }
+       
         
     }
     public virtual void Die()
