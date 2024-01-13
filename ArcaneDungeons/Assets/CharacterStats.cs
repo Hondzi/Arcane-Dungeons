@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour {
 
+
+
+    //declarace proměných
     private int maxHealth = 500;
     public int currentHealth { get; private set;}
 
     public int agility = 1;
 
-    public int cridchange = 2;
+    public int critchange = 2;
 
     public int MaxStamina = 50;
 public int currentStamina { get; private set;}
@@ -20,65 +23,71 @@ public int currentStamina { get; private set;}
     public Stat armor;
     public Stat marmor;
     public Stat intelligence;
-    
 
-    
-     
 
- // Celkové životy 
-    void Awake() 
+
+
+
+    // začáteční hodnoty po spuštění hry || nastavování hp a staminy 
+    void Awake()
     {
         currentHealth = maxHealth;
         currentStamina = MaxStamina;
 
     }
-     public void Update()
+
+
+
+    // tlačítka pro regen staminy + udělení dmg
+    public void Update()
     {
-     // Stamina    
         if (Input.GetKeyDown(KeyCode.S))
-        { currentStamina += MaxStamina-currentStamina;
-              Debug.Log(transform.name + " Vyregenerovala si si staminu momentalne ji mas: " + currentStamina);
-            }
-            
-
-
-
+        {
+            currentStamina += MaxStamina - currentStamina;
+            Debug.Log(transform.name + " Vyregenerovala si si staminu momentalne ji mas: " + currentStamina);
+        }
         if (Input.GetKeyDown(KeyCode.T))
         {
             int randomDamage = UnityEngine.Random.Range(5, 16);
             TakeDamage(randomDamage);
         }
     }
-// jak funguje damage 
+
+
+
+    // armor a úhyb 
     public void TakeDamage(int damage)
     {
         damage -= armor.GetValue();
         damage = Mathf.Clamp(damage, 0, int.MaxValue);
 
         int randomNumber = UnityEngine.Random.Range(0, 6);
-        if(randomNumber == agility)
+        if (randomNumber == agility)
         {
             damage = 0;
             Debug.Log(transform.name + " Vyhnul si se utoku");
         }
 
-       // Šance na crit 
 
-        else {
+
+
+        // damage + crit damage + žraní staminy za útoky
+        else
+        {
+            // ošetření toho aby se bez staminy nemohlo útočit
             if (currentStamina > 0){
-                int criddamage = UnityEngine.Random.Range(0, 16);
-                if (criddamage == cridchange)
+                
+                // crit útok
+                int critdamageR = UnityEngine.Random.Range(0, 16);
+                if (critdamageR == critchange)
                 {
-                    if (currentStamina >= 12)
+                    if (currentStamina >= 10)
                     {
                         int Changetomultiplie = UnityEngine.Random.Range(2, 5);
                         damage = Changetomultiplie * damage;
                         currentHealth -= damage;
-                        currentStamina -= 12;
+                        currentStamina -= 10;
                         Debug.Log(transform.name + " Udelil si crit damage v hodnote " + damage + " zbyva ti jeste " + currentStamina + " staminy a " + currentHealth + " zivotu");
-
-
-
                     }
                     else
                     {
@@ -87,9 +96,9 @@ public int currentStamina { get; private set;}
                 }
                 else
                 {
+                    // normal útok
                     if (currentStamina >= 4)
                     {
-
                         currentStamina -= 4;
                         currentHealth -= damage;
                         Debug.Log(transform.name + " Dostal " + damage + " damage " + " zbyva ti jeste " + currentStamina + " staminy a " + currentHealth + " zivotu");
@@ -105,7 +114,7 @@ public int currentStamina { get; private set;}
            
 
 
-
+            // Pokud máš 0 životů umřeš
             if (currentHealth <= 0)
             {
                 Die();
@@ -118,9 +127,10 @@ public int currentStamina { get; private set;}
        
         
     }
+    //Event toho co se stane když umřeš  || work in progress
     public virtual void Die()
     {
-        //Die in some way
+       
         Debug.Log(transform.name + "died.");
     }
 }
