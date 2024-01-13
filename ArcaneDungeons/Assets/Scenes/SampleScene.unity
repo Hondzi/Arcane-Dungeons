@@ -247,6 +247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   agility: 1
+  cridchange: 2
   damage:
     baseValue: 0
   mdamage:

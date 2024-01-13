@@ -10,6 +10,8 @@ public class CharacterStats : MonoBehaviour {
 
     public int agility = 1;
 
+    public int cridchange = 2;
+
     public Stat damage;
     public Stat mdamage;
     public Stat armor;
@@ -18,7 +20,7 @@ public class CharacterStats : MonoBehaviour {
     public Stat critchance;
     public Stat stamina;
     
-    
+     
 
 
     void Awake()
@@ -43,12 +45,23 @@ public class CharacterStats : MonoBehaviour {
         if(randomNumber == agility)
         {
             damage = 0;
-            Debug.Log(transform.name + "Vyhnul si se útoku");
+            Debug.Log(transform.name + "Vyhnul si se utoku");
         }
         else {
-            currentHealth -= damage;
+            int criddamage = UnityEngine.Random.Range(0, 16);
+            if (criddamage == cridchange) {   
+                 damage = damage*3;
+                 currentHealth -= damage;
+                 Debug.Log(transform.name + "udelil jsi crit" + damage + "damage.");
+
+
+            } else  {
+                currentHealth -= damage;
             Debug.Log(transform.name + "Dostal" + damage + "damage.");
-            Debug.Log(transform.name + "Zbyva ti jeste" + currentHealth + "zivotu");
+            Debug.Log(transform.name + "Zbyva ti jeste" + currentHealth + "zivotu");}
+
+
+           
         }
 
 
