@@ -22,7 +22,7 @@ public class CharacterStats : MonoBehaviour {
     
      
 
-
+ // Celké životy 
     void Awake()
     {
         currentHealth = maxHealth;
@@ -35,7 +35,7 @@ public class CharacterStats : MonoBehaviour {
             TakeDamage(randomDamage);
         }
     }
-
+// jak funguje damage 
     public void TakeDamage(int damage)
     {
         damage -= armor.GetValue();
@@ -47,10 +47,12 @@ public class CharacterStats : MonoBehaviour {
             damage = 0;
             Debug.Log(transform.name + "Vyhnul si se utoku");
         }
+       // Šance na crit 
         else {
-            int criddamage = UnityEngine.Random.Range(0, 16);
-            if (criddamage == cridchange) {   
-                 damage = damage*3;
+         int criddamage = UnityEngine.Random.Range(0, 16);
+            if (criddamage == cridchange) { 
+                int Changetomultiplie = UnityEngine.Random.Range(2, 5); 
+                 damage = Changetomultiplie*damage;
                  currentHealth -= damage;
                  Debug.Log(transform.name + "udelil jsi crit" + damage + "damage.");
 
