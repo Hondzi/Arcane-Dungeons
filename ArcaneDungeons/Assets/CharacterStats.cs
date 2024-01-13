@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour {
 
-    public int maxHealth = 100;
+    private int maxHealth = 500;
     public int currentHealth { get; private set;}
 
     public int agility = 1;
@@ -37,7 +37,7 @@ public int currentStamina { get; private set;}
      // Stamina    
         if (Input.GetKeyDown(KeyCode.S))
         { currentStamina += MaxStamina-currentStamina;
-              Debug.Log(transform.name + "Regenerovala se ti stamina" + currentStamina);
+              Debug.Log(transform.name + " Vyregenerovala si si staminu momentalne ji mas: " + currentStamina);
             }
             
 
@@ -59,7 +59,7 @@ public int currentStamina { get; private set;}
         if(randomNumber == agility)
         {
             damage = 0;
-            Debug.Log(transform.name + "Vyhnul si se utoku");
+            Debug.Log(transform.name + " Vyhnul si se utoku");
         }
 
        // Šance na crit 
@@ -74,16 +74,15 @@ public int currentStamina { get; private set;}
                         int Changetomultiplie = UnityEngine.Random.Range(2, 5);
                         damage = Changetomultiplie * damage;
                         currentHealth -= damage;
-                        Debug.Log(transform.name + "udelil jsi crit" + damage + "damage.");
-
                         currentStamina -= 12;
-                        Debug.Log(transform.name + "Zbyva ti jeste" + currentStamina + "Staminy");
+                        Debug.Log(transform.name + " Udelil si crit damage v hodnote " + damage + " zbyva ti jeste " + currentStamina + " staminy a " + currentHealth + " zivotu");
+
 
 
                     }
                     else
                     {
-                        Debug.Log(transform.name + "Nemáš dostatek staminy na provedení utoku " + currentStamina);
+                        Debug.Log(transform.name + " Nemáš dostatek staminy na provedení utoku, momentalne mas " + currentStamina + " staminy");
                     }
                 }
                 else
@@ -92,14 +91,13 @@ public int currentStamina { get; private set;}
                     {
 
                         currentStamina -= 4;
-                        Debug.Log(transform.name + "Zbyva ti jeste" + currentStamina + "Staminy");
                         currentHealth -= damage;
-                        Debug.Log(transform.name + "Dostal" + damage + "damage.");
-                        Debug.Log(transform.name + "Zbyva ti jeste" + currentHealth + "zivotu");
+                        Debug.Log(transform.name + " Dostal " + damage + " damage " + " zbyva ti jeste " + currentStamina + " staminy a " + currentHealth + " zivotu");
+                     
                     }
                     else
                     {
-                        Debug.Log(transform.name + "Nemáš dostatek staminy na provedení utoku " + currentStamina);
+                        Debug.Log(transform.name + " Nemáš dostatek staminy na provedení utoku, momentalne mas " + currentStamina + " staminy");
                     }
 
                 }
