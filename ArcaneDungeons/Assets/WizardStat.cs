@@ -1,12 +1,9 @@
-using System;
-using Unity.VisualScripting;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-
-public class CharacterStats : MonoBehaviour {
-
-
-
+public class WizardStat : MonoBehaviour
+{
     //declarace proměných
     private int maxHealth = 250;
     public int currentHealth { get; private set; }
@@ -17,12 +14,13 @@ public class CharacterStats : MonoBehaviour {
 
     public Healthbar healthbar;
     public Staminabar staminabar;
+    public CharacterStats characterstats;
 
     public int agility = 1;
 
     public int critchange = 2;
 
-    
+
 
     public Stat damage;
     public Stat mdamage;
@@ -49,13 +47,13 @@ public class CharacterStats : MonoBehaviour {
     // tlačítka pro regen staminy + udělení dmg
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             currentStamina += MaxStamina - currentStamina;
             Debug.Log(transform.name + " Vyregenerovala si si staminu momentalne ji mas: " + currentStamina);
             staminabar.SetStamina(currentStamina);
         }
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             int randomDamage = UnityEngine.Random.Range(5, 16);
             TakeDamage(randomDamage);
@@ -84,8 +82,9 @@ public class CharacterStats : MonoBehaviour {
         else
         {
             // ošetření toho aby se bez staminy nemohlo útočit
-            if (currentStamina > 0){
-                
+            if (currentStamina > 0)
+            {
+
                 // crit útok
                 int critdamageR = UnityEngine.Random.Range(0, 16);
                 if (critdamageR == critchange)
@@ -124,7 +123,7 @@ public class CharacterStats : MonoBehaviour {
 
                 }
             }
-           
+
 
 
             // Pokud máš 0 životů umřeš
@@ -137,13 +136,13 @@ public class CharacterStats : MonoBehaviour {
 
 
 
-       
-        
+
+
     }
     //Event toho co se stane když umřeš  || work in progress
     public virtual void Die()
     {
-       
+
         Debug.Log(transform.name + "died.");
     }
 }
