@@ -8,8 +8,10 @@ public class CharacterStats : MonoBehaviour {
 
 
     //declarace proměných
-    private int maxHealth = 500;
+    private int maxHealth = 250;
     public int currentHealth { get; private set;}
+
+    public Healthbar healthbar;
 
     public int agility = 1;
 
@@ -33,6 +35,7 @@ public int currentStamina { get; private set;}
     {
         currentHealth = maxHealth;
         currentStamina = MaxStamina;
+        healthbar.SetMaxHealth(maxHealth);
 
     }
 
@@ -88,6 +91,7 @@ public int currentStamina { get; private set;}
                         currentHealth -= damage;
                         currentStamina -= 10;
                         Debug.Log(transform.name + " Udelil si crit damage v hodnote " + damage + " zbyva ti jeste " + currentStamina + " staminy a " + currentHealth + " zivotu");
+                        healthbar.SetHealth(currentHealth);
                     }
                     else
                     {
@@ -102,7 +106,8 @@ public int currentStamina { get; private set;}
                         currentStamina -= 4;
                         currentHealth -= damage;
                         Debug.Log(transform.name + " Dostal " + damage + " damage " + " zbyva ti jeste " + currentStamina + " staminy a " + currentHealth + " zivotu");
-                     
+                        healthbar.SetHealth(currentHealth);
+
                     }
                     else
                     {
