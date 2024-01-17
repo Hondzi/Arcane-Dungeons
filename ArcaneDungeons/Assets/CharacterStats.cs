@@ -59,6 +59,13 @@ public class CharacterStats : MonoBehaviour {
         {
             int randomDamage = UnityEngine.Random.Range(5, 16);
             TakeDamage(randomDamage);
+
+
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            currentHealth += maxHealth - currentHealth;
+            healthbar.SetHealth(currentHealth);
         }
     }
 
